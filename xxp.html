@@ -57,7 +57,7 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
  }
  const world=new THREE.Group();scene.add(world);world.visible=false;
  const tree=new THREE.Group();world.add(tree);
- const H=9.0,R=3.45,N=45000,colors=["#fff4d5","#ffdc9a","#e8b969","#fff0d1","#d99462","#f5d9a8"].map(c=>new THREE.Color(c));
+ const H=9.0,R=3.45,N=36000,colors=["#fff4d5","#ffdc9a","#e8b969","#fff0d1","#d99462","#f5d9a8"].map(c=>new THREE.Color(c));
  const positions=new Float32Array(N*3),randoms=new Float32Array(N),phases=new Float32Array(N),sizes=new Float32Array(N),colorsArr=new Float32Array(N*3);
  for(let i=0;i<N;i++){
   const f=Math.pow(Math.random(),.78),y=-H*.49+f*H,cone=1-f;
@@ -116,11 +116,11 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
   op.rotation.x=(j-2)*.075;world.add(op);orbits.push(op);}
  const floor=new THREE.Group();floor.position.y=-4.95;world.add(floor);
  for(let arm=0;arm<5;arm++){const n=4800,arr=new Float32Array(n*3);
-  for(let i=0;i<n;i++){const u=Math.random(),rad=.2+u*12.4,a=arm*Math.PI*2/5+rad*.56+(Math.random()-.5)*.26;
+  for(let i=0;i<n;i++){const u=Math.random(),rad=.2+u*13.2,a=arm*Math.PI*2/5+rad*.56+(Math.random()-.5)*.26;
    arr[3*i]=Math.cos(a)*rad;arr[3*i+1]=(Math.random()-.5)*.08;arr[3*i+2]=Math.sin(a)*rad*.62;}
   const fg=new THREE.BufferGeometry();fg.setAttribute('position',new THREE.BufferAttribute(arr,3));
   floor.add(new THREE.Points(fg,new THREE.PointsMaterial({color:arm%2?16766348:0xffffff,size:.04,transparent:true,opacity:.62,blending:THREE.AdditiveBlending,depthWrite:false})));}
- for(let j=0;j<7;j++){const ring=new THREE.Mesh(new THREE.RingGeometry(2+j*.73,2.015+j*.73,160),new THREE.MeshBasicMaterial({color:j%2?16766348:0xffffff,transparent:true,opacity:.11-j*.009,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false}));
+ for(let j=0;j<7;j++){const ring=new THREE.Mesh(new THREE.RingGeometry(2.1+j*.78,2.115+j*.78,160),new THREE.MeshBasicMaterial({color:j%2?16766348:0xffffff,transparent:true,opacity:.11-j*.009,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false}));
   ring.rotation.x=-Math.PI/2;ring.position.y=-.035+j*.002;floor.add(ring);}
  let started=false,buildAt=0;
  const open=document.querySelector('#open');

@@ -1,6 +1,8 @@
-# Christmas Star for Cuicui
+# 为朋友做的圣诞问候
 
-A standalone Christmas greeting webpage for Cuicui (脆脆).
+为朋友们制作的个性化圣诞问候网页，用粒子圣诞树、星光与冬日风景送上祝福。
+
+[查看好友问候](https://sariel247.github.io/merry-christmas/friends/)
 
 ## Project
 
@@ -17,7 +19,7 @@ Open `index.html` in a modern browser. The page is intended to work as a self-co
 
 1. Open the repository **Settings → Pages**.
 2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch `main` and folder `/(root)`, then save.
+3. Select branch `gh-pages` and folder `/(root)`, then save.
 4. After the deployment finishes, open the Pages URL shown on that settings page.
 
 The site will be available once `index.html` has been added to the repository and Pages deployment completes.

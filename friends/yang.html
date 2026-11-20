@@ -48,7 +48,7 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));
  renderer.setSize(stage.clientWidth,stage.clientHeight);
- renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+ renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.16;
  renderer.setClearColor(0x000000,0);stage.appendChild(renderer.domElement);
  scene.add(new THREE.AmbientLight(0xffffff,1.15));
  const lights=[];
@@ -57,7 +57,7 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
  }
  const world=new THREE.Group();scene.add(world);world.visible=false;
  const tree=new THREE.Group();world.add(tree);
- const H=9.0,R=3.45,N=36000,colors=["#f3fbff","#d9edff","#a9d3ff","#c9c2ff","#ffffff","#a8e8f0"].map(c=>new THREE.Color(c));
+ const H=9.0,R=3.45,N=30000,colors=["#f3fbff","#d9edff","#a9d3ff","#c9c2ff","#ffffff","#a8e8f0"].map(c=>new THREE.Color(c));
  const positions=new Float32Array(N*3),randoms=new Float32Array(N),phases=new Float32Array(N),sizes=new Float32Array(N),colorsArr=new Float32Array(N*3);
  for(let i=0;i<N;i++){
   const f=Math.pow(Math.random(),.78),y=-H*.49+f*H,cone=1-f;
@@ -84,12 +84,12 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
   vec3 p=mix(source,position,local);float wind=sin(uTime*.55+aPhase*2.0+position.y*.9);
   p.x+=wind*(.025+aRandom*.06)*local;p.z+=cos(uTime*.45+aPhase*2.0)*.045*local;
   vec4 mv=modelViewMatrix*vec4(p,1.0);gl_Position=projectionMatrix*mv;
-  gl_PointSize=(1.8+aSize*4.8)*uDpr*(16.0/-mv.z);vAlpha=(.35+aRandom*.65)*mix(.55,1.0,local);}`,
+  gl_PointSize=(1.9+aSize*5.0)*uDpr*(16.0/-mv.z);vAlpha=min(1.0,(.35+.65*pow(aRandom,.9))*mix(.55,1.0,local)*1.03);}`,
   fragmentShader:`varying vec3 vColor;varying float vAlpha;void main(){float d=length(gl_PointCoord-.5);if(d>.5)discard;
   float halo=exp(-d*8.0);float core=1.0-smoothstep(.02,.19,d);gl_FragColor=vec4(vColor,(halo*.5+core*.8)*vAlpha);}`
  });
  tree.add(new THREE.Points(tg,treeMat));
- const garlandN=5200,gpos=new Float32Array(garlandN*3),gcol=new Float32Array(garlandN*3);
+ const garlandN=4700,gpos=new Float32Array(garlandN*3),gcol=new Float32Array(garlandN*3);
  for(let i=0;i<garlandN;i++){const u=i/garlandN,a=u*Math.PI*9.2,r=R*(1-u*.91)+.04;
   gpos[3*i]=Math.cos(a)*r;gpos[3*i+1]=-H*.46+u*H*.94;gpos[3*i+2]=Math.sin(a)*r;
   const c=new THREE.Color(i%5===0?'#fff8e9':'#d9f2ff');gcol.set([c.r,c.g,c.b],3*i);}
@@ -119,8 +119,8 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
   for(let i=0;i<n;i++){const u=Math.random(),rad=.2+u*13.2,a=arm*Math.PI*2/5+rad*.56+(Math.random()-.5)*.26;
    arr[3*i]=Math.cos(a)*rad;arr[3*i+1]=(Math.random()-.5)*.08;arr[3*i+2]=Math.sin(a)*rad*.62;}
   const fg=new THREE.BufferGeometry();fg.setAttribute('position',new THREE.BufferAttribute(arr,3));
-  floor.add(new THREE.Points(fg,new THREE.PointsMaterial({color:arm%2?12115199:0xffffff,size:.04,transparent:true,opacity:.62,blending:THREE.AdditiveBlending,depthWrite:false})));}
- for(let j=0;j<7;j++){const ring=new THREE.Mesh(new THREE.RingGeometry(2.1+j*.78,2.115+j*.78,160),new THREE.MeshBasicMaterial({color:j%2?12115199:0xffffff,transparent:true,opacity:.11-j*.009,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false}));
+  floor.add(new THREE.Points(fg,new THREE.PointsMaterial({color:arm%2?12115199:0xffffff,size:.04,transparent:true,opacity:.6944,blending:THREE.AdditiveBlending,depthWrite:false})));}
+ for(let j=0;j<7;j++){const ring=new THREE.Mesh(new THREE.RingGeometry(2.1+j*.78,2.115+j*.78,160),new THREE.MeshBasicMaterial({color:j%2?12115199:0xffffff,transparent:true,opacity:(.11-j*.009)*1.12,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false}));
   ring.rotation.x=-Math.PI/2;ring.position.y=-.035+j*.002;floor.add(ring);}
  let started=false,buildAt=0;
  const open=document.querySelector('#open');
@@ -133,7 +133,7 @@ const world=document.getElementById('world'),intro=document.getElementById('intr
    floor.rotation.y=-t*.025;garland.rotation.y=-t*.04;garland.scale.y=Math.max(.001,progress);garland.position.y=-H*.5*(1-progress);
    bulbs.scale.y=Math.max(.001,progress);bulbs.position.y=-H*.5*(1-progress);
    topper.position.y=-H*.48+progress*H+.3;topper.visible=progress>.91;topper.scale.setScalar(THREE.MathUtils.smoothstep(progress,.91,1));
-   topper.rotation.y=t*.58;starGlow.material.opacity=.68+.25*Math.sin(t*3.2);bulbs.rotation.y=t*.025;
+   topper.rotation.y=t*.58;starGlow.material.opacity=(.68+.25*Math.sin(t*3.2))*1.15;bulbs.rotation.y=t*.025;
    lights[0].intensity=145+30*Math.sin(t*.9);lights[1].intensity=125+24*Math.sin(t*1.1+1);
   }else{world.rotation.y=Math.sin(t*.12)*.035;}
   renderer.render(scene,camera);

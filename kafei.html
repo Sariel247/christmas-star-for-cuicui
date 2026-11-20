@@ -10,7 +10,6 @@
 .grand-architecture:after{content:"";position:absolute;inset:45% 10% 10%;background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--c) 45%,transparent) 0 7%,transparent 7% 17%);opacity:.55}
 .grand-architecture i{position:absolute;bottom:0;z-index:1;width:13%;height:56%;border:1px solid color-mix(in srgb,var(--c) 50%,transparent);background:linear-gradient(90deg,#182138,color-mix(in srgb,var(--b) 32%,#182138));border-radius:40px 40px 0 0}
 .grand-architecture i:nth-child(1){left:12%}.grand-architecture i:nth-child(2){right:12%}.grand-architecture i:nth-child(3){left:44%;width:12%;height:48%}
-.grand-architecture b{position:absolute;top:3%;left:35%;width:30%;text-align:center;font:11px system-ui;letter-spacing:.3em;color:var(--c);padding:12px 4px;border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:6px;background:#10182c}
 .gift-orbit{position:absolute;z-index:2;inset:18% 6% 25%;pointer-events:none}
 .gift-orbit i{position:absolute;font-style:normal;color:var(--c);font-size:clamp(18px,3vw,30px);text-shadow:0 0 14px color-mix(in srgb,var(--a) 55%,transparent)}
 .gift-orbit i:nth-child(1){left:6%;top:35%}.gift-orbit i:nth-child(2){right:8%;top:15%}.gift-orbit i:nth-child(3){left:23%;top:8%}.gift-orbit i:nth-child(4){right:22%;top:65%}
@@ -22,7 +21,7 @@
 .friend-campus .grand-architecture:before{clip-path:polygon(0 24%,18% 24%,18% 8%,39% 8%,50% 0,61% 8%,82% 8%,82% 24%,100% 24%,100% 100%,0 100%);background:linear-gradient(180deg,#bdd7da66,#20364acc)}
 .friend-campus .grand-architecture i{border-radius:3px;height:45%;background:linear-gradient(90deg,#e2d8b755,#c2e7ed88)}
 .message{background:none!important;border:0!important;box-shadow:none!important;border-radius:0;padding:0}.message .line{text-shadow:0 1px 4px #000}
-@media(max-width:700px){.grand-architecture{height:30%;bottom:20%}.grand-architecture b{font-size:8px;letter-spacing:.12em}.message .line{font-size:14px;line-height:1.85;letter-spacing:.05em}}
+@media(max-width:700px){.grand-architecture{height:30%;bottom:20%}.message .line{font-size:14px;line-height:1.85;letter-spacing:.05em}}
 
 /* Reduce large animated filters on devices that cannot keep up. */
 .light-effects .nebula,.light-effects .aurora{filter:none;animation:none}
@@ -38,7 +37,7 @@
 
 
  .tree:before,.tree:after{display:none!important}.tree{width:min(88vw,520px);height:min(72vh,650px)}.world.opened .tree{animation:none!important}@media(max-width:700px){.tree{width:92vw;height:58vh;bottom:14%}}
-</style><script src="three.min.js"></script></head><body class="friend-coffee"><div class="world" id="world"><canvas id="sky"></canvas><div class="nebula"></div><div class="aurora"></div><div class="halo"></div><div class="moon"></div><div class="mountains"></div><div class="city"></div><div class="tree" aria-label="动态粒子圣诞树"></div><div id="tree3d" aria-hidden="true"></div><div class="grand-architecture"><i></i><i></i><i></i><b>WINTER CAFÉ</b></div><div class="gift-orbit" aria-hidden="true"><i>☕</i><i>✦</i><i>✧</i><i>☕</i></div><div class="confetti-glow"></div><div class="foreground"></div><div class="burst" id="burst"></div></div>
+</style><script src="three.min.js"></script></head><body class="friend-coffee"><div class="world" id="world"><canvas id="sky"></canvas><div class="nebula"></div><div class="aurora"></div><div class="halo"></div><div class="moon"></div><div class="mountains"></div><div class="city"></div><div class="tree" aria-label="动态粒子圣诞树"></div><div id="tree3d" aria-hidden="true"></div><div class="grand-architecture"><i></i><i></i><i></i></div><div class="gift-orbit" aria-hidden="true"><i>☕</i><i>✦</i><i>✧</i><i>☕</i></div><div class="confetti-glow"></div><div class="foreground"></div><div class="burst" id="burst"></div></div>
 <div class="top">A QUIET CHRISTMAS, AN OLD FRIEND</div><section class="intro" id="intro"><div class="eyebrow">✦ MERRY CHRISTMAS ✦</div><h1>咖啡</h1><p class="sub">认识很多年，祝福就放在这盏暖灯里</p><button class="open" id="open">点亮冬日暖灯</button></section><section class="message" id="message"><div class="line">认识这么多年了，圣诞节就祝你近来顺利，新的一年也能过得舒服、自在。忙归忙，也记得给自己留点休息的时间。</div><small>✦ 日子慢慢过，愿你一切都好。 ✦</small></section>
 <script>
 const canvas=document.getElementById('sky'),ctx=canvas.getContext('2d');
